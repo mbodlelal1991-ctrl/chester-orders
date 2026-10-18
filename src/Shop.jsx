@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { getProducts, placeOrder } from "./api";
 
+// Fill these in. Leave a value as "" to hide that button.
+const CONTACT = {
+  whatsapp: "", // e.g. "27623299889" (no plus sign, no spaces)
+  phone: "",    // e.g. "0623299889"
+  email: "",    // e.g. "orders@example.com"
+};
+
 const NAVY = "#10206b";
 const BLUE = "#1f2a7c";
 const RED = "#d62828";
@@ -30,11 +37,41 @@ const panel = {
 const panelTitle = { background: RED, color: "#fff", fontWeight: 800, letterSpacing: 1, padding: "10px 14px", fontSize: 18, textTransform: "uppercase" };
 const field = { display: "block", width: "100%", padding: 10, marginBottom: 10, boxSizing: "border-box", border: "2px solid #c9d1e6", borderRadius: 8, background: "#fff", color: NAVY };
 const mainBtn = { padding: 12, width: "100%", background: BLUE, color: "#fff", border: `2px solid ${RED}`, borderRadius: 999, fontSize: 16, fontWeight: 800, cursor: "pointer" };
+const linkBtn = { display: "inline-block", padding: "10px 18px", background: BLUE, color: "#fff", border: `2px solid ${RED}`, borderRadius: 999, fontWeight: 800, textDecoration: "none" };
+
+function Contact() {
+  if (!CONTACT.whatsapp && !CONTACT.phone && !CONTACT.email) return null;
+  const waText = encodeURIComponent("Hi, I have a question about my order.");
+  return (
+    <div style={{ ...panel, marginTop: 24, textAlign: "center" }}>
+      <div style={panelTitle}>Need help? Contact us</div>
+      <div style={{ padding: 16, display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" }}>
+        {CONTACT.whatsapp && (
+          <a style={linkBtn} href={`https://wa.me/${CONTACT.whatsapp}?text=${waText}`} target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
+        )}
+        {CONTACT.phone && (
+          <a style={linkBtn} href={`tel:${CONTACT.phone}`}>
+            Call {CONTACT.phone}
+          </a>
+        )}
+        {CONTACT.email && (
+          <a style={linkBtn} href={`mailto:${CONTACT.email}`}>
+            Email us
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
   const [qty, setQty] = useState({});
   const [deliveryDate, setDeliveryDate] = useState("");
+  const [phone, setPhone] = useState("");
+  const [placedPhone, setPlacedPhone] = useState("");
   const [notes, setNotes] = useState("");
   const [error, setError] = useState("");
   const [placing, setPlacing] = useState(false);
@@ -62,16 +99,23 @@ export default function Shop() {
     setError("");
     if (lines.length === 0) return setError("Add at least one item.");
     if (!deliveryDate) return setError("Choose a delivery date.");
+    const cleanPhone = phone.replace(/[\s()-]/g, "");
+    if (!/^(\+?27|0)\d{9}$/.test(cleanPhone)) {
+      return setError("Enter a valid phone number, for example 0623299889.");
+    }
     setPlacing(true);
     try {
       const res = await placeOrder({
         deliveryDate,
         notes,
+        phone: cleanPhone,
         items: lines.map(l => ({ productId: l.productId, quantity: l.qty })),
       });
       setDone(res);
+      setPlacedPhone(cleanPhone);
       setQty({});
       setNotes("");
+      setPhone("");
       setDeliveryDate("");
     } catch (e) {
       setError(e.message);
@@ -86,12 +130,14 @@ export default function Shop() {
           <div style={panelTitle}>Order placed</div>
           <div style={{ padding: 16 }}>
             <p>Thank you. Chester Butchery has received your order.</p>
+            <p>We will contact you on <strong>{placedPhone}</strong> to confirm.</p>
             <h3>Total: R{Number(done.total).toFixed(2)}</h3>
             <button style={mainBtn} onClick={() => setDone(null)}>
               Place another order
             </button>
           </div>
         </div>
+        <Contact />
       </div>
     );
   }
@@ -164,6 +210,14 @@ export default function Shop() {
             <label>Delivery date</label>
             <input style={field} type="date" min={today} value={deliveryDate}
               onChange={e => setDeliveryDate(e.target.value)} />
+
+            <label>Your phone / WhatsApp number</label>
+            <input style={field} type="tel" placeholder="e.g. 0623299889" value={phone}
+              onChange={e => setPhone(e.target.value)} />
+            <div style={{ fontSize: 12, marginTop: -6, marginBottom: 10 }}>
+              Used only to contact you about this order.
+            </div>
+
             <textarea style={field} rows={3} placeholder="Notes (optional)" value={notes}
               onChange={e => setNotes(e.target.value)} />
 
@@ -174,6 +228,8 @@ export default function Shop() {
           </div>
         </div>
       </div>
+
+      <Contact />
     </div>
   );
 }
