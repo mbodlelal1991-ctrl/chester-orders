@@ -10,7 +10,7 @@ const card = {
   background: "#fff",
   borderRadius: 12,
   overflow: "hidden",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.35)",
+  boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
   color: NAVY,
   display: "flex",
   flexDirection: "column",
@@ -18,18 +18,17 @@ const card = {
 const cardTitle = { background: ORANGE, color: NAVY, fontWeight: 800, padding: "8px 10px", fontSize: 15 };
 const cardBody = { padding: 8, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 };
 const priceTag = { background: NAVY, color: "#fff", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 13 };
-const btn = { width: 32, height: 32, fontSize: 18, fontWeight: 700, borderRadius: 8, border: `2px solid ${NAVY}`, background: "#fff", color: NAVY, cursor: "pointer", padding: 0 };
-const btnPlus = { ...btn, background: RED, border: `2px solid ${RED}`, color: "#fff" };
+const btn = { width: 32, height: 32, fontSize: 18, fontWeight: 700, borderRadius: 8, border: `2px solid ${RED}`, background: "#fff", color: RED, cursor: "pointer", padding: 0 };
 const panel = {
   background: "#fff",
   borderRadius: 12,
   overflow: "hidden",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.35)",
+  boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
   color: NAVY,
 };
 const panelTitle = { background: RED, color: "#fff", fontWeight: 800, letterSpacing: 1, padding: "10px 14px", fontSize: 18, textTransform: "uppercase" };
 const field = { display: "block", width: "100%", padding: 10, marginBottom: 10, boxSizing: "border-box", border: "2px solid #c9d1e6", borderRadius: 8, background: "#fff", color: NAVY };
-const mainBtn = { padding: 12, width: "100%", background: RED, color: "#fff", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer" };
+const mainBtn = { padding: 12, width: "100%", background: "#fff", color: RED, border: `2px solid ${RED}`, borderRadius: 8, fontSize: 16, fontWeight: 800, cursor: "pointer" };
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -99,11 +98,15 @@ export default function Shop() {
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16, fontFamily: "sans-serif" }}>
       <div style={{ textAlign: "center", marginBottom: 18 }}>
-        <h1 style={{ color: "#fff", margin: 0, fontSize: 38, letterSpacing: 2, textTransform: "uppercase", fontWeight: 900, textShadow: "2px 3px 0 rgba(0,0,0,0.35)" }}>
-          Chester Butchery
-        </h1>
-        <div style={{ display: "inline-block", background: RED, color: YELLOW, fontWeight: 900, fontSize: 18, letterSpacing: 2, padding: "4px 22px", transform: "skewX(-10deg)", marginTop: 8 }}>
-          <span style={{ display: "inline-block", transform: "skewX(10deg)" }}>ORDER ONLINE</span>
+        <div style={{ display: "inline-block", background: NAVY, borderTop: `5px solid ${RED}`, borderBottom: `5px solid ${RED}`, borderRadius: 14, padding: "10px 34px", boxShadow: "0 4px 10px rgba(0,0,0,0.25)" }}>
+          <h1 style={{ margin: 0, color: "#fff", fontSize: 38, letterSpacing: 2, textTransform: "uppercase", fontWeight: 900, WebkitTextStroke: `1.5px ${RED}`, textShadow: "2px 3px 0 rgba(0,0,0,0.4)" }}>
+            Chester Butchery
+          </h1>
+        </div>
+        <div>
+          <div style={{ display: "inline-block", background: RED, color: YELLOW, fontWeight: 900, fontSize: 18, letterSpacing: 2, padding: "4px 22px", transform: "skewX(-10deg)", marginTop: 10 }}>
+            <span style={{ display: "inline-block", transform: "skewX(10deg)" }}>ORDER ONLINE</span>
+          </div>
         </div>
       </div>
 
@@ -128,7 +131,7 @@ export default function Shop() {
                   <span style={{ minWidth: 50, fontWeight: 700, fontSize: 13 }}>
                     {qty[p.productId] || 0} {p.pricingType === "per_kg" ? "kg" : "pack(s)"}
                   </span>
-                  <button style={btnPlus} onClick={() => change(p, 1)}>+</button>
+                  <button style={btn} onClick={() => change(p, 1)}>+</button>
                 </div>
               </div>
             </div>
