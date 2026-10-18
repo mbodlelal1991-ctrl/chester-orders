@@ -1,6 +1,10 @@
-/* Chester look: light page, faint truck watermark, white buttons with red edges */
-:root { color-scheme: light; }
-html { background: #f4f6fb; }
+:root {
+  color-scheme: light;
+  font-family: system-ui, Arial, sans-serif;
+}
+html {
+  background: #f4f6fb;
+}
 body {
   display: block;
   margin: 0;
@@ -14,12 +18,18 @@ body {
   color: #10206b;
 }
 button {
-  background: #fff;
-  color: #d62828;
+  background: #1f2a7c;
+  color: #fff;
   border: 2px solid #d62828;
-  border-radius: 8px;
+  border-radius: 999px;
   font-weight: 700;
   cursor: pointer;
 }
-button:hover { background: #fff5f5; border-color: #d62828; }
-button:disabled { opacity: 0.6; cursor: not-allowed; }
+button:hover {
+  background: #d62828;
+  border-color: #d62828;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
