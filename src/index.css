@@ -1,10 +1,6 @@
-/* Chester colour theme (navy, red, yellow) */
-:root { --navy:#1b2a6b; --red:#d62828; --yellow:#f9b61a; --page:#f4f6fb; color-scheme: light; }
-body { background: var(--page); color: #1d2433; }
-h1 { color: var(--navy); display: inline-block; border-bottom: 4px solid var(--red); padding-bottom: 6px; }
-h2, h3 { color: var(--navy); }
-button { background: var(--navy); color: #fff; border: 1px solid var(--navy); border-radius: 8px; cursor: pointer; }
-button:hover { background: var(--red); border-color: var(--red); }
-input, textarea { border: 2px solid #c9d1e6; border-radius: 8px; }
-input:focus, textarea:focus { outline: none; border-color: var(--yellow); }
-[class*="card"] { background: #ffffff; border: 2px solid var(--navy); border-radius: 12px; }
+/* Chester colour theme (/* Faint butchery background */
+body {
+ background-color: #f4f6fb;
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='https://www.google.com/url?q=http://www.w3.org/2000/svg&source=gmail&ust=1792401564288000&sa=E' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='%23d62828' fill-opacity='0.08'%3E%3Cpath d='M34 62c-14 6-20 24-10 38 12 16 40 14 52 0 10-12 8-34-6-42-12-7-24-5-36 4z'/%3E%3Cellipse cx='188' cy='196' rx='28' ry='20' transform='rotate(-30 188 196)'/%3E%3Cellipse cx='70' cy='214' rx='22' ry='15' transform='rotate(20 70 214)'/%3E%3C/g%3E%3Cg fill='none' stroke='%231b2a6b' stroke-opacity='0.09' stroke-width='6' stroke-linecap='round'%3E%3Ccircle cx='196' cy='62' r='9'/%3E%3Ccircle cx='196' cy='62' r='21'/%3E%3Ccircle cx='196' cy='62' r='33'/%3E%3Cpath d='M206 182L236 154' stroke-width='7'/%3E%3Cpath d='M46 80c0-8 8-14 16-12' stroke-width='4'/%3E%3C/g%3E%3Cg fill='%231b2a6b' fill-opacity='0.09'%3E%3Ccircle cx='240' cy='150' r='7'/%3E%3Ccircle cx='232' cy='160' r='6'/%3E%3C/g%3E%3C/svg%3E");
+ background-size: 260px 260px;
+}
