@@ -1,14 +1,25 @@
-/* Chester look: royal blue, red and yellow */
+/* Chester look: light page, faint truck watermark, white buttons with red edges */
 :root { color-scheme: light; }
-html { background: #1b2f8f; }
+html { background: #f4f6fb; }
 body {
   display: block;
   margin: 0;
   min-height: 100vh;
-  background-color: #1b2f8f;
-  background-image:
-    repeating-conic-gradient(from 0deg at 50% 0%, rgba(255,255,255,0.06) 0deg 7deg, rgba(255,255,255,0) 7deg 14deg),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M34 62c-14 6-20 24-10 38 12 16 40 14 52 0 10-12 8-34-6-42-12-7-24-5-36 4z'/%3E%3Cellipse cx='188' cy='196' rx='28' ry='20' transform='rotate(-30 188 196)'/%3E%3Cellipse cx='70' cy='214' rx='22' ry='15' transform='rotate(20 70 214)'/%3E%3C/g%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='6' stroke-linecap='round'%3E%3Ccircle cx='196' cy='62' r='9'/%3E%3Ccircle cx='196' cy='62' r='21'/%3E%3Ccircle cx='196' cy='62' r='33'/%3E%3Cpath d='M206 182L236 154' stroke-width='7'/%3E%3Cpath d='M46 80c0-8 8-14 16-12' stroke-width='4'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Ccircle cx='240' cy='150' r='7'/%3E%3Ccircle cx='232' cy='160' r='6'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 100% 100%, 260px 260px;
-  background-attachment: fixed, scroll;
+  background-color: #f4f6fb;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='420' viewBox='0 0 900 420'%3E%3Cg fill='%2310206b' fill-opacity='0.08' fill-rule='evenodd'%3E%3Crect x='40' y='60' width='560' height='240' rx='14'/%3E%3Crect x='536' y='30' width='64' height='34' rx='6'/%3E%3Crect x='40' y='300' width='780' height='22' rx='6'/%3E%3Cpath d='M620 120h120l60 70c14 16 20 30 20 54v56H620zM640 140h90l44 50h-134z'/%3E%3Cpath d='M92 336a38 38 0 1 0 76 0a38 38 0 1 0 -76 0zM116 336a14 14 0 1 0 28 0a14 14 0 1 0 -28 0z'/%3E%3Cpath d='M202 336a38 38 0 1 0 76 0a38 38 0 1 0 -76 0zM226 336a14 14 0 1 0 28 0a14 14 0 1 0 -28 0z'/%3E%3Cpath d='M662 336a38 38 0 1 0 76 0a38 38 0 1 0 -76 0zM686 336a14 14 0 1 0 28 0a14 14 0 1 0 -28 0z'/%3E%3C/g%3E%3Crect x='40' y='214' width='560' height='16' fill='%23d62828' fill-opacity='0.10'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center bottom 24px;
+  background-size: min(92vw, 900px);
+  background-attachment: fixed;
+  color: #10206b;
 }
+button {
+  background: #fff;
+  color: #d62828;
+  border: 2px solid #d62828;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover { background: #fff5f5; border-color: #d62828; }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
