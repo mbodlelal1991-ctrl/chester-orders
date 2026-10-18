@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react";
 import { getProducts, placeOrder } from "./api";
 
-const NAVY = "#1b2a6b";
+const NAVY = "#10206b";
 const RED = "#d62828";
+const YELLOW = "#f9b61a";
+const ORANGE = "#f5a623";
 
 const card = {
 background: "#fff",
-border: `2px solid ${NAVY}`,
 borderRadius: 12,
-padding: 12,
-boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+overflow: "hidden",
+boxShadow: "0 4px 10px rgba(0,0,0,0.35)",
+color: NAVY,
+display: "flex",
+flexDirection: "column",
 };
+const cardTitle = { background: ORANGE, color: NAVY, fontWeight: 800, padding: "8px 10px", fontSize: 15 };
+const cardBody = { padding: 8, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 };
+const priceTag = { background: NAVY, color: "#fff", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 13 };
+const btn = { width: 32, height: 32, fontSize: 18, fontWeight: 700, borderRadius: 8, border: `2px solid ${NAVY}`, background: "#fff", color: NAVY, cursor: "pointer", padding: 0 };
+const btnPlus = { ...btn, background: RED, border: `2px solid ${RED}`, color: "#fff" };
 const panel = {
 background: "#fff",
-border: `2px solid ${NAVY}`,
 borderRadius: 12,
-padding: 16,
-boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+overflow: "hidden",
+boxShadow: "0 4px 10px rgba(0,0,0,0.35)",
+color: NAVY,
 };
-const btn = { width: 36, height: 36, fontSize: 18, borderRadius: 8, border: `1px solid ${NAVY}`, background: NAVY, color: "#fff", cursor: "pointer" };
-const field = { display: "block", width: "100%", padding: 10, marginBottom: 10, boxSizing: "border-box", border: "2px solid #c9d1e6", borderRadius: 8 };
-const mainBtn = { padding: 12, width: "100%", background: RED, color: "#fff", border: "none", borderRadius: 8, fontSize: 16, cursor: "pointer" };
+const panelTitle = { background: RED, color: "#fff", fontWeight: 800, letterSpacing: 1, padding: "10px 14px", fontSize: 18, textTransform: "uppercase" };
+const field = { display: "block", width: "100%", padding: 10, marginBottom: 10, boxSizing: "border-box", border: "2px solid #c9d1e6", borderRadius: 8, background: "#fff", color: NAVY };
+const mainBtn = { padding: 12, width: "100%", background: RED, color: "#fff", border: "none", borderRadius: 8, fontSize: 16, fontWeight: 700, cursor: "pointer" };
 
 export default function Shop() {
 const [products, setProducts] = useState([]);
@@ -74,7 +83,8 @@ if (done) {
 return (
 <div style={{ maxWidth: 520, margin: "0 auto", padding: 16, fontFamily: "sans-serif" }}>
 <div style={panel}>
-<h1>Order placed</h1>
+<div style={panelTitle}>Order placed</div>
+<div style={{ padding: 16 }}>
 <p>Thank you. Chester Butchery has received your order.</p>
 <h3>Total: R{Number(done.total).toFixed(2)}</h3>
 <button style={mainBtn} onClick={() => setDone(null)}>
@@ -82,12 +92,20 @@ Place another order
 </button>
 </div>
 </div>
+</div>
 );
 }
 
 return (
 <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16, fontFamily: "sans-serif" }}>
-<h1>Chester Butchery</h1>
+<div style={{ textAlign: "center", marginBottom: 18 }}>
+<h1 style={{ color: "#fff", margin: 0, fontSize: 38, letterSpacing: 2, textTransform: "uppercase", fontWeight: 900, textShadow: "2px 3px 0 rgba(0,0,0,0.35)" }}>
+Chester Butchery
+</h1>
+<div style={{ display: "inline-block", background: RED, color: YELLOW, fontWeight: 900, fontSize: 18, letterSpacing: 2, padding: "4px 22px", transform: "skewX(-10deg)", marginTop: 8 }}>
+<span style={{ display: "inline-block", transform: "skewX(10deg)" }}>ORDER ONLINE</span>
+</div>
+</div>
 
 <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-start" }}>
 <div
@@ -100,26 +118,29 @@ gap: 12,
 >
 {products.filter(p => p.available !== false).map(p => (
 <div key={p.productId} style={card}>
-<strong>{https://www.google.com/url?q=http://p.name&source=gmail&ust=1792402907852000&sa=E}</strong>
-<div>
-R{p.price} {p.pricingType === "per_kg" ? "per kg" : `per ${p.packSize} pack`}
-</div>
-<div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginTop: 8 }}>
+<div style={cardTitle}>{https://www.google.com/url?q=http://p.name&source=gmail&ust=1792404012027000&sa=E}</div>
+<div style={cardBody}>
+<span style={priceTag}>
+R{Number(p.price).toFixed(2)} {p.pricingType === "per_kg" ? "per kg" : `per ${p.packSize} pack`}
+</span>
+<div style={{ display: "flex", alignItems: "center", gap: 6 }}>
 <button style={btn} onClick={() => change(p, -1)}>-</button>
-<span>
+<span style={{ minWidth: 50, fontWeight: 700, fontSize: 13 }}>
 {qty[p.productId] || 0} {p.pricingType === "per_kg" ? "kg" : "pack(s)"}
 </span>
-<button style={btn} onClick={() => change(p, 1)}>+</button>
+<button style={btnPlus} onClick={() => change(p, 1)}>+</button>
+</div>
 </div>
 </div>
 ))}
 </div>
 
 <div style={{ ...panel, flex: "1 1 300px", maxWidth: 360, position: "sticky", top: 12 }}>
-<h2 style={{ marginTop: 0 }}>Your order</h2>
-{lines.length === 0 && <p>Nothing added yet.</p>}
+<div style={panelTitle}>Your order</div>
+<div style={{ padding: 16 }}>
+{lines.length === 0 && <p style={{ marginTop: 0 }}>Nothing added yet.</p>}
 {lines.map(l => (
-<div key={l.productId}>{https://www.google.com/url?q=http://l.name&source=gmail&ust=1792402907852000&sa=E} x {l.qty}: R{l.total.toFixed(2)}</div>
+<div key={l.productId}>{https://www.google.com/url?q=http://l.name&source=gmail&ust=1792404012027000&sa=E} x {l.qty}: R{l.total.toFixed(2)}</div>
 ))}
 <h3>Total: R{total.toFixed(2)}</h3>
 
@@ -136,5 +157,7 @@ onChange={e => setNotes(e.target.value)} />
 </div>
 </div>
 </div>
+</div>
 );
+}
 }
