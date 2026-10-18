@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getProducts, placeOrder } from "./api";
 
 const NAVY = "#10206b";
+const BLUE = "#1f2a7c";
 const RED = "#d62828";
 const YELLOW = "#f9b61a";
 const ORANGE = "#f5a623";
@@ -17,8 +18,8 @@ const card = {
 };
 const cardTitle = { background: ORANGE, color: NAVY, fontWeight: 800, padding: "8px 10px", fontSize: 15 };
 const cardBody = { padding: 8, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 };
-const priceTag = { background: NAVY, color: "#fff", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 13 };
-const btn = { width: 32, height: 32, fontSize: 18, fontWeight: 700, borderRadius: 8, border: `2px solid ${RED}`, background: "#fff", color: RED, cursor: "pointer", padding: 0 };
+const priceTag = { background: BLUE, color: "#fff", borderRadius: 8, padding: "4px 10px", fontWeight: 700, fontSize: 13 };
+const btn = { width: 32, height: 32, fontSize: 18, fontWeight: 700, borderRadius: 999, border: `2px solid ${RED}`, background: BLUE, color: "#fff", cursor: "pointer", padding: 0 };
 const panel = {
   background: "#fff",
   borderRadius: 12,
@@ -28,7 +29,7 @@ const panel = {
 };
 const panelTitle = { background: RED, color: "#fff", fontWeight: 800, letterSpacing: 1, padding: "10px 14px", fontSize: 18, textTransform: "uppercase" };
 const field = { display: "block", width: "100%", padding: 10, marginBottom: 10, boxSizing: "border-box", border: "2px solid #c9d1e6", borderRadius: 8, background: "#fff", color: NAVY };
-const mainBtn = { padding: 12, width: "100%", background: "#fff", color: RED, border: `2px solid ${RED}`, borderRadius: 8, fontSize: 16, fontWeight: 800, cursor: "pointer" };
+const mainBtn = { padding: 12, width: "100%", background: BLUE, color: "#fff", border: `2px solid ${RED}`, borderRadius: 999, fontSize: 16, fontWeight: 800, cursor: "pointer" };
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
@@ -97,13 +98,26 @@ export default function Shop() {
 
   return (
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: 16, fontFamily: "sans-serif" }}>
-      <div style={{ textAlign: "center", marginBottom: 18 }}>
-        <div style={{ display: "inline-block", background: NAVY, borderTop: `5px solid ${RED}`, borderBottom: `5px solid ${RED}`, borderRadius: 14, padding: "10px 34px", boxShadow: "0 4px 10px rgba(0,0,0,0.25)" }}>
-          <h1 style={{ margin: 0, color: "#fff", fontSize: 38, letterSpacing: 2, textTransform: "uppercase", fontWeight: 900, WebkitTextStroke: `1.5px ${RED}`, textShadow: "2px 3px 0 rgba(0,0,0,0.4)" }}>
-            Chester Butchery
-          </h1>
+      <div style={{ marginBottom: 18 }}>
+        <div
+          style={{
+            background: `repeating-conic-gradient(from 0deg at 50% 50%, #263592 0deg 10deg, ${BLUE} 10deg 20deg)`,
+            borderRadius: 14,
+            padding: "26px 12px",
+            textAlign: "center",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.25)",
+          }}
+        >
+          <div style={{ display: "inline-block", border: `5px solid ${RED}`, borderRadius: 999, padding: "6px clamp(20px, 6vw, 44px) 10px" }}>
+            <h1 style={{ margin: 0, color: "#fff", fontSize: "clamp(36px, 9vw, 54px)", lineHeight: 1.05, fontWeight: 900, letterSpacing: 2, textTransform: "uppercase" }}>
+              Chester
+            </h1>
+            <div style={{ color: "#fff", fontWeight: 700, fontSize: 15, letterSpacing: "0.4em", paddingLeft: "0.4em", textTransform: "uppercase" }}>
+              Butchery
+            </div>
+          </div>
         </div>
-        <div>
+        <div style={{ textAlign: "center" }}>
           <div style={{ display: "inline-block", background: RED, color: YELLOW, fontWeight: 900, fontSize: 18, letterSpacing: 2, padding: "4px 22px", transform: "skewX(-10deg)", marginTop: 10 }}>
             <span style={{ display: "inline-block", transform: "skewX(10deg)" }}>ORDER ONLINE</span>
           </div>
